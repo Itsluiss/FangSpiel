@@ -3,9 +3,9 @@ import GLOOP.*;
 
 import javax.media.opengl.GL;
 
-public class Kugel{
+public class Kugel {
 
-    public GLKugel  kugel;
+    public GLKugel kugel;
     private Box dieBox;
     private Spielfeld feld;
 
@@ -21,36 +21,49 @@ public class Kugel{
         kugel.setzeFarbe(2, 0, 9);
 
     }
-public void bewege() {
-        if(this.gibZ()<(-425)) {
-    }
-    if(this.gibZ()>(425)) {
-    }
-    if(this.gibX()<(-425)) {
-    }
-    if(this.gibX()>(425)) {
-    }
-    }
 
+    public void bewege() {
+        int q = (int) (Math.random() * 10);
+        int w = (int) (Math.random() * 10);
+        kugel.verschiebe(q, 0, w);
 
+        if (this.gibZ() < (-425)) {
 
+            kugel.verschiebe(-q, 0, -w);
+        }
 
+        if (this.gibZ() > (425)) {
 
-
-
-
-    public double gibX(){
-        return kugel.gibX();}
-
-    public double gibY(){
-        return kugel.gibY();}
-
-    public double gibZ(){
-        return kugel.gibZ();}
+        kugel.verschiebe(-q, 0, -w);
     }
 
+            if (this.gibX() < (-425)) {
+
+                kugel.verschiebe(-q, 0,-w);
+            }
+
+            if (this.gibX() > (425)) {
+
+                kugel.verschiebe(-q, 0, -w);
+            }
+}
 
 
+
+
+
+    public double gibX() {
+        return kugel.gibX();
+    }
+
+    public double gibY() {
+        return kugel.gibY();
+    }
+
+    public double gibZ() {
+        return kugel.gibZ();
+    }
+}
 
 
 
