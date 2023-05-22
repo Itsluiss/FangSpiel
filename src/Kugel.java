@@ -11,45 +11,47 @@ public class Kugel {
 
     private double radius;
     private boolean istAktiv;
-    private double vX, vZ;
+
     private Kugelfangen kugelfangen;
 
     int PunktX = (int) (Math.random() * 400) - (int) (Math.random() * 400);
 
     int PunktZ = (int) (Math.random() * 400) - (int) (Math.random() * 400);
 
-    int q = (int) (Math.random() * 10) - (int) (Math.random() * 10);
-    int w = (int) (Math.random() * 10) - (int) (Math.random() * 10);
+    int q = (int) (Math.random() * 5) - (int) (Math.random() * 5);
+    int w = (int) (Math.random() * 5) - (int) (Math.random() * 5);
 
-    public Kugel() {
+    public Kugel(Box pBox) {
         kugel = new GLKugel(PunktX, 30, PunktZ, 20);
         kugel.setzeFarbe(7, 0, 0);
-
+dieBox = pBox;
     }
 
     public void bewege() {
 
-        kugel.verschiebe(q, 0, w);
+if(getroffen()){
+    kugel.verschiebe(700000000,1000000,10000000);
+}
 
-        if (this.gibZ() < (-425)) {
-
-            kugel.verschiebe(-q, 0, -w);
+        if (this.gibZ() < (-440) ||
+                this.gibZ() > (440) ||
+                this.gibX() < (-440) ||
+                this.gibX() > (440)) {
+        }
+        else{
+            kugel.verschiebe(q, 0, w);
         }
 
-        if (this.gibZ() > (425)) {
-
-            kugel.verschiebe(-q, 0, -w);
+        if (this.gibZ() < (-420)||
+                    this.gibZ() > (420)){
+            w = -w;
+        }
+        if (this.gibX() < (-420)||
+                this.gibX() > (420)){
+            q = -q;
         }
 
-        if (this.gibX() < (-425)) {
 
-            kugel.verschiebe(-q, 0, -w);
-        }
-
-        if (this.gibX() > (425)) {
-
-            kugel.verschiebe(-q, 0, -w);
-        }
     }
 
 
@@ -66,7 +68,17 @@ public class Kugel {
     }
 
 
-    private boolean getroffen() {
+    public void drehe() {
+
+
+
+
+
+
+
+    }
+
+    public boolean getroffen() {
         double abstand = Math.sqrt(
                 Math.pow(kugel.gibX() - dieBox.gibX(), 2) +
                         Math.pow(kugel.gibY() - dieBox.gibY(), 2) +
@@ -74,14 +86,6 @@ public class Kugel {
         );
         if (abstand < 70) return true;
         else return false;
-
-    }
-
-
-    public void Despawn(){
-        if(this.getroffen())kugel.setzeSichtbarkeit(false);
-
-
 
     }
 }
